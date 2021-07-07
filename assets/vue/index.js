@@ -11,8 +11,10 @@ import '../styles/app.scss';
 // start the Stimulus application
 import Vue from "vue";
 import App from "./App";
+import router from "./router/index";
 
 new Vue({
   components: { App },
-  template: "<App/>"
+  template: "<App/>",
+  router,
 }).$mount("#app");

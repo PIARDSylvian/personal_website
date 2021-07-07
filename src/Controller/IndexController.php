@@ -9,7 +9,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class IndexController extends AbstractController
 {
     /**
-     * @Route("/", name="index")
+     * @Route("/{vueRouting}", name="index")
+     * @Route("/")
      */
     public function index(): Response
     {

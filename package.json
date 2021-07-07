@@ -22,6 +22,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "vue": "^2.6.14"
+        "vue": "^2.6.14",
+        "vue-router": "^3.5.2"
     }
 }

@@ -15,7 +15,7 @@ import App from "./App";
 import router from "./router/index";
 
 new Vue({
-  components: { App },
-  template: "<App/>",
-  router,
+	components: { App },
+	template: "<App/>",
+	router,
 }).$mount("#app");

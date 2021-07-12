@@ -9,7 +9,7 @@ export default new VueRouter({
   mode: "history",
   routes: [
     { path: "/home", component: Home },
-    { path: "*", redirect: "/home" },
-    { path: "/test", component: Test }
+    { path: "/test", component: Test },
+    { path: "*", redirect: "/home" }
   ]
 });

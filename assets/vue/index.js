@@ -7,8 +7,9 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import '../styles/app.scss';
+import 'bootstrap';
 
-// start the Stimulus application
+// start the Vue application
 import Vue from "vue";
 import App from "./App";
 import router from "./router/index";

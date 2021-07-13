@@ -13,9 +13,11 @@ import 'bootstrap';
 import Vue from "vue";
 import App from "./App";
 import router from "./router/index";
+import store from "./store";
 
 new Vue({
-  components: { App },
-  template: "<App/>",
-  router,
+	components: { App },
+	template: "<App/>",
+	router,
+	store
 }).$mount("#app");

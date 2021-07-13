@@ -18,7 +18,8 @@ class ApiController extends AbstractController
      */
     public function getMenu()
     {
-        $test = ['aaa'];
+        sleep(2);
+        $test = ['aaa','bbb'];
         return $test;
     }
 }

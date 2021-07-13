@@ -1,58 +1,85 @@
 <template>
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <router-link
-                    class="navbar-brand"
-                    to="/home"
-                >
-                    App
+    <body>
+        <main class="d-flex">
+            <nav class="flex-column flex-shrink-1 p-3 bg-light">
+                <router-link class="d-flex align-items-center mb-md-0 me-md-auto link-dark text-decoration-none" to="/home">
+                    <span class="fs-4">App</span>
                 </router-link>
-                <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-toggle="collapse"
-                    data-bs-toggle="collapse"
-                    data-target="#navbarNav"
-                    data-bs-target="#navbarNav"
-                    aria-controls="navbarNav"
-                    aria-bs-controls="navbarNav"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span class="navbar-toggler-icon" />
-                </button>
-                <div
-                    id="navbarNav"
-                    class="collapse navbar-collapse"
-                >
-                    <ul class="navbar-nav">
-                        <router-link
-                            class="nav-item"
-                            tag="li"
-                            to="/home"
-                            active-class="active"
-                        >
-                            <a class="nav-link">Home</a>
-                        </router-link>
-                        <router-link
-                            class="nav-item"
-                            tag="li"
-                            to="/test"
-                        >
-                            <a class="nav-link">test</a>
-                        </router-link>
-                    </ul>
+                <hr>
+                <div class="d-flex">
+                    <div class="form-group">
+                        <input class="form-control input-sm" type="search" placeholder="Search" aria-label="Search">
+                    </div>
+                    <div class="form-group ms-1">
+                        <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
+                    </div>
                 </div>
-            </div>
-        </nav>
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <router-link to="home" active-class="active" v-slot="{ navigate, isActive, isExactActive }" custom>
+                        <li class="nav-item" :class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']">
+                            <a href="/home" @click="navigate" class="nav-link link-dark" :class="[isActive && 'active', isExactActive && 'active']">home</a>
+                        </li>
+                    </router-link>
 
-        <router-view />
-    </div>
+                    <li v-if="isLoading" class="nav-item">
+                        <span v-if="isLoading" class="nav-link navbar-text link-dark text-decoration-none">Loading...</span>
+                    </li>
+
+                    <li v-else-if="hasError" class="nav-item">
+                        <p class="alert alert-danger nav-link" role="alert">{{ error }}</p>
+                    </li>
+
+                    <router-link v-for="link in menu" v-else :key="link" :to="link" active-class="active" v-slot="{ navigate, isActive, isExactActive }" custom >
+                        <li class="nav-item" :class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']">
+                            <a :href="'/'+link" @click="navigate" class="nav-link link-dark" :class="[isActive && 'active', isExactActive && 'active']">{{ link }}</a>
+                        </li>
+                    </router-link>
+
+                    <router-link to="test" active-class="active" v-slot="{ navigate, isActive, isExactActive }" custom>
+                        <li class="nav-item" :class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']">
+                            <a href="/test" @click="navigate" class="nav-link link-dark" :class="[isActive && 'active', isExactActive && 'active']">test</a>
+                        </li>
+                    </router-link>
+                </ul>
+            </nav>
+            <div class="d-flex flex-column flex-shrink-1 container-fluid">
+                <router-view />
+            </div>
+        </main>
+    </body>
 </template>
 
 <script>
-  export default {
+
+import Test from "./views/Test";
+import router from "./router/index";
+
+export default {
     name: "App",
-  }
+    computed: {
+        isLoading() {
+            return this.$store.getters["menu/isLoading"];
+        },
+        hasError() {
+            return this.$store.getters["menu/hasError"];
+        },
+        error() {
+            return this.$store.getters["menu/error"];
+        },
+        hasMenu() {
+            return this.$store.getters["menu/hasMenu"];
+        },
+        menu() {
+            let menu = this.$store.getters["menu/menu"];
+            menu.forEach(link => { 
+                router.addRoute({ path: '/'+link, name: link, component: Test }) 
+            })
+            return menu
+        }
+    },
+    created() {
+        this.$store.dispatch("menu/getMenu");
+    }
+}
 </script>

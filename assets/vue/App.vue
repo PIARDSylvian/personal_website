@@ -1,8 +1,8 @@
 <template>
-    <body>
-        <main class="d-flex">
-            <nav class="flex-column flex-shrink-1 p-3 bg-light">
-                <router-link class="d-flex align-items-center mb-md-0 me-md-auto link-dark text-decoration-none" to="/home">
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-12 col-sm-4 col-md-2 bg-light vh-col-sm-100">
+                <router-link class="align-items-center mb-md-0 me-md-auto link-dark text-decoration-none" to="/home">
                     <span class="fs-4">App</span>
                 </router-link>
                 <hr>
@@ -43,11 +43,11 @@
                     </router-link>
                 </ul>
             </nav>
-            <div class="d-flex flex-column flex-shrink-1 container-fluid">
+            <main class="col-12 col-sm-8 col-md-10">
                 <router-view />
-            </div>
-        </main>
-    </body>
+            </main>
+        </div>
+    </div>
 </template>
 
 <script>

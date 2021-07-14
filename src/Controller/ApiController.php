@@ -18,8 +18,24 @@ class ApiController extends AbstractController
      */
     public function getMenu()
     {
-        dump($this->getDoctrine()->getRepository(Category::class)->findBy(array("active" => true)));
-        die;
+        $em = $this->getDoctrine()->getManager();
+
+        $category = new Category();
+        $category->setName('category 1');
+        $category->setActive(true);
+        $em->persist($category);
+        $category = new Category();
+        $category->setName('category 2');
+        $em->persist($category);
+
+        $category = new Category();
+        $category->setName('category 3');
+        $category->setActive(true);
+        $em->persist($category);
+        
+        
+        $em->flush();
+
         return $this->getDoctrine()->getRepository(Category::class)->findBy(array("active" => true));
     }
 }

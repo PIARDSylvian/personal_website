@@ -14,10 +14,11 @@ import Vue from "vue";
 import App from "./App";
 import router from "./router/index";
 import store from "./store";
+import Test from "./views/Test";
 
 new Vue({
 	components: { App },
 	template: "<App/>",
-	router,
-	store
+	store,
+	router
 }).$mount("#app");

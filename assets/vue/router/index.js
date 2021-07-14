@@ -13,7 +13,7 @@ let router = new VueRouter({
 });
 
 (async function() {
-  Promise.all([store.dispatch("menu/getMenu")]).then((values) => {
+  Promise.all([store.dispatch("menu/getMenu"), store.dispatch("post/getPosts")]).then((values) => {
     values[0].forEach(link => {
       let url = '/'+link.name.replace(/\s/g, "").toLowerCase()
       router.addRoute({ path: url, name: url, component: Test })

@@ -50,9 +50,6 @@
 
 <script>
 
-import Test from "./views/Test";
-import router from "./router/index";
-
 export default {
     name: "App",
     computed: {
@@ -69,16 +66,8 @@ export default {
             return this.$store.getters["menu/hasMenu"];
         },
         menu() {
-            let menu = this.$store.getters["menu/menu"];
-            menu.forEach(link => {
-                let url = '/'+link.name.replace(/\s/g, "").toLowerCase()
-                router.addRoute({ path: url, name: url, component: Test }) 
-            })
-            return menu
+            return this.$store.getters["menu/menu"];
         }
-    },
-    created() {
-        this.$store.dispatch("menu/getMenu");
     },
     filters : {
         lowerCase : function (value) {

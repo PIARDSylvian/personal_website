@@ -14,7 +14,7 @@ use App\Entity\Post;
 class ApiController extends AbstractController
 {
     /**
-     * @Rest\Get("/menu")
+     * @Rest\Get("/menu", name="app_menu_list")
      * @Rest\View(StatusCode = 200, serializerGroups={"menu"})
      */
     public function getMenu()
@@ -23,7 +23,7 @@ class ApiController extends AbstractController
     }
 
     /**
-     * @Rest\Get("/post")
+     * @Rest\Get("/posts", name="app_posts_list")
      * @Rest\View(StatusCode = 200, serializerGroups={"post"})
      */
     public function getPostList()
@@ -32,7 +32,7 @@ class ApiController extends AbstractController
     }
 
     /**
-     * @Rest\Get("/post/{slug}")
+     * @Rest\Get("/posts/{slug}", name="app_post_show")
      * @Rest\View(StatusCode = 200, serializerGroups={"post"})
      */
     public function getPost(String $slug)

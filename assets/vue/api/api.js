@@ -5,9 +5,9 @@ export default {
 		return axios.get("/api/menu");
 	},
 	getPosts() {
-		return axios.get("/api/post");
+		return axios.get("/api/posts");
 	},
 	getPost(slug) {
-		return axios.get("/api/post",{ params: { slug: slug } });
+		return axios.get("/api/posts",{ params: { slug: slug } });
 	}
 };

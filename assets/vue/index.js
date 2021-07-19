@@ -18,6 +18,6 @@ import store from "./store";
 new Vue({
 	components: { App },
 	template: "<App/>",
-	router,
-	store
+	store,
+	router
 }).$mount("#app");

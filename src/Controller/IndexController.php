@@ -19,14 +19,14 @@ class IndexController extends AbstractController
 
         $entityManager = $this->getDoctrine()->getManager();
 
-        for ($i=0; $i <= 5 ; $i++) { 
+        for ($i=1; $i <= 5 ; $i++) { 
             $category = new Category();
             $category->setName('Category '.$i);
             $category->setActive(true);
 
             $entityManager->persist($category);
 
-            for ($i=0; $i <= 5 ; $i++) {
+            for ($j=0; $j <= 5 ; $j++) {
                 $post = new Post();
                 $post->setTitle('Post '.$i);
                 $post->setSlug('post-'.$i);

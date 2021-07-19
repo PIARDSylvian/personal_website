@@ -1,21 +1,24 @@
 <template>
     <div class="container-fluid">
         <div class="row">
-            <nav class="col-12 col-sm-4 col-md-2 bg-light vh-col-sm-100">
+            <nav class="col-12 col-xs-min-vw-100 col-sm-4 col-md-2 navbar-expand-md navbar-light bg-light">
                 <router-link class="align-items-center mb-md-0 me-md-auto link-dark text-decoration-none" to="/">
-                    <span class="fs-4">App</span>
+                    <span class="navbar-brand">App</span>
                 </router-link>
                 <hr>
-                <div class="d-flex">
-                    <div class="form-group">
-                        <input class="form-control input-sm" type="search" placeholder="Search" aria-label="Search">
+                <div class="d-flex justify-content-between">
+                    <div class="col-xs-6 col-md-12">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="search" aria-label="Search" aria-describedby="search">
+                            <button class="btn btn-outline-secondary" type="button" id="button-addon1"><i class="bi bi-search"></i></button>
+                        </div>
                     </div>
-                    <div class="form-group ms-1">
-                        <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
-                    </div>
+                    <button class="col-md navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                 </div>
                 <hr>
-                <ul class="nav nav-pills flex-column mb-auto">
+                <ul class="nav nav-pills flex-column mb-2 collapse navbar-collapse align-items-stretch" id="navbarSupportedContent">
                     <router-link to="/" active-class="active" v-slot="{ href, navigate, isExactActive}" custom>
                         <li class="nav-item">
                             <a :href="href" @click="navigate" class="nav-link link-dark" :class="[isExactActive && 'active']">Home</a>

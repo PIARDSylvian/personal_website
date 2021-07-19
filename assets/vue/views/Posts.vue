@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <div class="row col">
-      <h1>{{category.name}}</h1>
-    </div>
+  <div class="row px-4">
+    <h1 class="text-center">{{category.name}}</h1>
     <div v-if="isLoading" class="disabled d-flex justify-content-center mt-4">
         <span class="spinner-border" role="status"></span>
     </div>
@@ -13,9 +11,9 @@
         </div>
     </div>
 
-    <div v-for="post in posts" v-else :key="post.id">
-        <div class="card" style="width: 18rem;">
-          <img v-if="post.image" :src="post.image" class="card-img-top" :alt="post.title">
+    <div v-for="post in posts" v-else :key="post.id" class="col-xs-12 col-sm-6 col-md-4">
+      <div class="card m-4">
+        <img v-if="post.image" :src="post.image" class="card-img-top" :alt="post.title">
           <div class="card-body">
             <h5 class="card-title">{{post.title}}</h5>
             <p class="card-text">{{post.content}}</p>
@@ -23,7 +21,7 @@
               <a :href="href" @click="navigate" class="btn btn-primary">Lire</a>
             </router-link>
           </div>
-        </div>
+      </div>
     </div>
     <button :disabled="loading" v-if="!(isEnd[category.id] || isEnd[0])" v-on:click="more(posts, category.id)" type="button" class="btn btn-secondary">More</button>
   </div>

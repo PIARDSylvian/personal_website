@@ -27,10 +27,10 @@ class IndexController extends AbstractController
     
                 $entityManager->persist($category);
     
-                for ($j=0; $j <= 5 ; $j++) {
+                for ($j=1; $j <= 5 ; $j++) {
                     $post = new Post();
-                    $post->setTitle('Post '.$i);
-                    $post->setSlug('post-'.$i);
+                    $post->setTitle('Post '.$j);
+                    $post->setSlug('post-'.$j);
                     $post->setContent('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
                     $post->setCreatedAt(\DateTimeImmutable::createFromMutable(new \DateTime('NOW')));
                     $post->setActive(true);

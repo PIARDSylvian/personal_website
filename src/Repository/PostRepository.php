@@ -34,15 +34,17 @@ class PostRepository extends ServiceEntityRepository
             ;
         }
 
+        if(!$active) {
+            $qb->andWhere('a.active = TRUE');
+            $qb->leftJoin('a.category','c')
+                ->where('c.active = TRUE');
+        }
+
         if ($category) {
             $qb
                 ->andWhere('a.category = :category')
                 ->setParameter('category', $category)
             ;
-        }
-
-        if(!$active) {
-            $qb->andWhere('a.active = TRUE');
         }
 
         $qb->setFirstResult($offset)->setMaxResults($limit);

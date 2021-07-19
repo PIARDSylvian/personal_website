@@ -22,26 +22,27 @@
                         </li>
                     </router-link>
 
-                    <li v-if="isLoading" class="nav-item disabled">
-                        <div class="d-flex justify-content-center mt-4">
-                            <span class="spinner-border" role="status"></span>
-                        </div>
-                    </li>
-
-                    <li v-else-if="hasError" class="nav-item disabled mt-3">
+                    <li v-if="hasError" class="nav-item disabled mt-3">
                         <div class="alert alert-danger" role="alert">
                             {{ error }}
                         </div>
                     </li>
 
-                    <router-link v-for="link in menu" v-else :key="link.name" :to="link.name|lowerCase" active-class="active" v-slot="{ navigate, isExactActive }" custom >
+                    <li v-else-if="isLoading || !isPopulated" class="nav-item disabled">
+                        <div class="d-flex justify-content-center mt-4">
+                            <span class="spinner-border" role="status"></span>
+                        </div>
+                    </li>
+
+
+                    <router-link v-for="link in menu" v-else :key="link.id" :to="{name: link.name}" active-class="active" v-slot="{ href, navigate, isActive, isExactActive }" custom >
                         <li class="nav-item">
-                            <a :href="'/'+link.name|lowerCase" @click="navigate" class="nav-link link-dark" :class="[isExactActive && 'active']">{{ link.name }}</a>
+                            <a :href="href" @click="navigate" class="nav-link link-dark" :class="[isActive && 'active' ,isExactActive && 'active']">{{ link.name }}</a>
                         </li>
                     </router-link>
                 </ul>
             </nav>
-            <main class="col-12 col-sm-8 col-md-10">
+            <main v-if="!isLoading && !hasError" class="col-12 col-sm-8 col-md-10">
                 <router-view />
             </main>
         </div>
@@ -67,11 +68,9 @@ export default {
         },
         menu() {
             return this.$store.getters["menu/menu"];
-        }
-    },
-    filters : {
-        lowerCase : function (value) {
-            return value.replace(/\s/g, "").toLowerCase();
+        },
+        isPopulated() {
+            return this.$store.getters["menu/isPopulated"];
         }
     }
 }

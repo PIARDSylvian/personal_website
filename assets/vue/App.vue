@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid">
         <div class="row">
-            <nav class="col-12 col-xs-min-vw-100 col-sm-4 col-md-2 navbar-expand-md navbar-light bg-light">
+            <nav class="col-12 col-sm-4 col-md-2 navbar-expand-sm navbar-light bg-light">
                 <router-link class="align-items-center mb-md-0 me-md-auto link-dark text-decoration-none" to="/">
                     <span class="navbar-brand">App</span>
                 </router-link>
@@ -18,10 +18,10 @@
                     </button>
                 </div>
                 <hr>
-                <ul class="nav nav-pills flex-column mb-2 collapse navbar-collapse align-items-stretch" id="navbarSupportedContent">
+                <ul class="nav nav-pills min-vh-100 flex-column mb-2 collapse navbar-collapse align-items-stretch" id="navbarSupportedContent">
                     <router-link to="/" active-class="active" v-slot="{ href, navigate, isExactActive}" custom>
                         <li class="nav-item">
-                            <a :href="href" @click="navigate" class="nav-link link-dark" :class="[isExactActive && 'active']">Home</a>
+                            <a :href="href" v-on="{ click: [navigate, closeMenu] }" class="nav-link link-dark" :class="[isExactActive && 'active']">Home</a>
                         </li>
                     </router-link>
 
@@ -37,10 +37,9 @@
                         </div>
                     </li>
 
-
                     <router-link v-for="link in menu" v-else :key="link.id" :to="{name: link.name}" active-class="active" v-slot="{ href, navigate, isActive, isExactActive }" custom >
                         <li class="nav-item">
-                            <a :href="href" @click="navigate" class="nav-link link-dark" :class="[isActive && 'active' ,isExactActive && 'active']">{{ link.name }}</a>
+                            <a :href="href" v-on="{ click: [navigate, closeMenu] }" class="nav-link link-dark" :class="[isActive && 'active' ,isExactActive && 'active']">{{ link.name }}</a>
                         </li>
                     </router-link>
                 </ul>
@@ -75,6 +74,11 @@ export default {
         isPopulated() {
             return this.$store.getters["menu/isPopulated"];
         }
-    }
+    },
+    methods: {
+        closeMenu: function () {
+            document.body.querySelector("#navbarSupportedContent").classList.remove("show")
+        }
+  },
 }
 </script>

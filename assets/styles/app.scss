@@ -3,4 +3,10 @@
 
 body {
     background-color: lightgray;
+
+    .collapsing {
+        -webkit-transition: none;
+        transition: none;
+        display: none;
+    }
 }

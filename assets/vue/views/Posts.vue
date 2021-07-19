@@ -9,9 +9,8 @@
         <div class="alert alert-danger" role="alert">
             {{ error }}
         </div>
-    </div>
-
-    <div v-for="post in posts" v-else :key="post.id" class="col-xs-12 col-sm-6 col-md-4">
+    </div>                            
+    <div v-for="post in posts" v-else :key="post.id" class="col-12	col-sm-6 col-md-4">
       <div class="card m-4">
         <img v-if="post.image" :src="post.image" class="card-img-top" :alt="post.title">
           <div class="card-body">

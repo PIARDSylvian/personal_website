@@ -19,6 +19,37 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
+    public function search($term, int $category = null, string $order = 'desc', int $limit = 20, int $offset = 0, bool $active = false)
+    {
+        $qb = $this
+            ->createQueryBuilder('a')
+            ->select('a')
+            ->orderBy('a.createdAt', $order)
+        ;
+
+        if ($term) {
+            $qb
+                ->andWhere('a.title LIKE :like')
+                ->setParameter('like', '%'.$term.'%')
+            ;
+        }
+
+        if ($category) {
+            $qb
+                ->andWhere('a.category = :category')
+                ->setParameter('category', $category)
+            ;
+        }
+
+        if(!$active) {
+            $qb->andWhere('a.active = TRUE');
+        }
+
+        $qb->setFirstResult($offset)->setMaxResults($limit);
+
+        return $qb->getQuery()->getResult();
+    }
+
     // /**
     //  * @return Post[] Returns an array of Post objects
     //  */

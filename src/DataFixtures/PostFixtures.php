@@ -12,9 +12,6 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        // $product = new Product();
-        // $manager->persist($product);
-        
         for ($i = 1; $i <= 40; $i++) {
             $post = new Post();
             $post->setSlug('Post-'.$i);

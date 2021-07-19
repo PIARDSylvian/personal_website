@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PostRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
@@ -15,43 +15,43 @@ class Post
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups("post")
+     * @Serializer\Groups("post")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("post")
+     * @Serializer\Groups("post")
      */
     private $slug;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("post")
+     * @Serializer\Groups("post")
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups("post")
+     * @Serializer\Groups("post")
      */
     private $image;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups("post")
+     * @Serializer\Groups("post")
      */
     private $content;
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * @Groups("post")
+     * @Serializer\Groups("post")
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
-     * @Groups("post")
+     * @Serializer\Groups("post")
      */
     private $updatedAt;
 
@@ -59,6 +59,13 @@ class Post
      * @ORM\Column(type="boolean")
      */
     private $active = false;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class)
+     * @ORM\JoinColumn(nullable=false)
+     * @Serializer\Groups("post")
+     */
+    private $category;
 
     public function getId(): ?int
     {
@@ -145,6 +152,18 @@ class Post
     public function setActive(bool $active): self
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

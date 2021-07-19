@@ -2,14 +2,16 @@ import API from "../api/api";
 
 const FETCHING_MENU = "FETCHING_MENU",
     FETCHING_MENU_SUCCESS = "FETCHING_MENU_SUCCESS",
-    FETCHING_MENU_ERROR = "FETCHING_MENU_ERROR";
+    FETCHING_MENU_ERROR = "FETCHING_MENU_ERROR",
+    MENU_POPULATED = "MENU_POPULATED";
 
 export default {
     namespaced: true,
     state: {
         isLoading: false,
         error: null,
-        menu: []
+        menu: [],
+        isPopulated: false,
     },
     getters: {
         isLoading(state) {
@@ -26,6 +28,9 @@ export default {
         },
         menu(state) {
             return state.menu;
+        },
+        isPopulated(state) {
+            return state.isPopulated;
         }
     },
     mutations: {
@@ -43,6 +48,9 @@ export default {
             state.isLoading = false;
             state.error = error;
             state.menu = [];
+        },
+        [MENU_POPULATED](state) {
+            state.isPopulated = true;
         }
     },
     actions: {
@@ -56,6 +64,9 @@ export default {
                 commit(FETCHING_MENU_ERROR, error);
                 return null;
             }
+        },
+        async populated({ commit }) {
+            commit(MENU_POPULATED);
         }
     }
 };

@@ -4,10 +4,10 @@ export default {
 	getMenu() {
 		return axios.get("/api/menu");
 	},
-	getPosts() {
-		return axios.get("/api/posts");
+	getPosts(search, offset, category) {
+		return axios.get("/api/posts",{ params: { keyword: search, offset: offset, category: category} });
 	},
 	getPost(slug) {
-		return axios.get("/api/posts",{ params: { slug: slug } });
+		return axios.get("/api/posts/"+slug);
 	}
 };

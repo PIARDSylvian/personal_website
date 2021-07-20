@@ -67,10 +67,10 @@ export default {
   },
   methods: {
     more: function (posts, category) {
-		this.loading = true
-		this.$store.dispatch("post/getPosts", {more:true, category:category, offset:posts.length, search:null}).finally(() => {
-			this.loading = false
-      	})
+      this.loading = true
+      this.$store.dispatch("post/getPosts", {more:true, category:category, offset:posts.length, search:null}).finally(() => {
+        this.loading = false
+      })
     }
   },
   filters: {
@@ -78,6 +78,13 @@ export default {
       if (!value) return ''
       return value.replace(/\s/g, "").toLowerCase();
     }
-  }
+  },
+  updated: function () {
+    this.$nextTick(function () {
+      if (this.posts.length == 0 && !this.loading) {
+        this.more(this.posts, this.$props.category.id)
+      }
+    })
+}
 };
 </script>

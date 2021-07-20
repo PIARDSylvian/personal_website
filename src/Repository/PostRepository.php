@@ -27,17 +27,17 @@ class PostRepository extends ServiceEntityRepository
             ->orderBy('a.createdAt', $order)
         ;
 
+        if(!$active) {
+            $qb->andWhere('a.active = TRUE')
+                ->join('a.category','c')
+                ->andWhere('c.active = TRUE');
+        }
+
         if ($term) {
             $qb
                 ->andWhere('a.title LIKE :like')
                 ->setParameter('like', '%'.$term.'%')
             ;
-        }
-
-        if(!$active) {
-            $qb->andWhere('a.active = TRUE');
-            $qb->leftJoin('a.category','c')
-                ->where('c.active = TRUE');
         }
 
         if ($category) {

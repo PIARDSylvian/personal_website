@@ -8,10 +8,7 @@
                 <hr>
                 <div class="d-flex justify-content-between">
                     <div class="col-xs-6 col-md-12">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="search" aria-label="Search" aria-describedby="search">
-                            <button class="btn btn-outline-secondary" type="button" id="button-addon1"><i class="bi bi-search"></i></button>
-                        </div>
+                        <Search />
                     </div>
                     <button class="col-md navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -53,8 +50,11 @@
 
 <script>
 
+import Search from "./components/search";
+
 export default {
     name: "App",
+    components: {Search},
     computed: {
         isLoading() {
             return this.$store.getters["menu/isLoading"];
@@ -78,7 +78,10 @@ export default {
     methods: {
         closeMenu: function () {
             document.body.querySelector("#navbarSupportedContent").classList.remove("show")
+        },
+        scrollToTop: function () {
+            window.scrollTo(0,0);
         }
-  },
+    }
 }
 </script>

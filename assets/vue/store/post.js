@@ -1,6 +1,7 @@
 import API from "../api/api";
 
 const FETCHING_POSTS = "FETCHING_POST",
+    FETCHING_MORE_POSTS ="FETCHING_MORE_POSTS", 
     FETCHING_POSTS_SUCCESS = "FETCHING_POSTS_SUCCESS",
     FETCHING_POST_SUCCESS = "FETCHING_POST_SUCCESS",
     FETCHING_POSTS_ERROR = "FETCHING_POSTS_ERROR",
@@ -10,6 +11,7 @@ export default {
     namespaced: true,
     state: {
         isLoading: false,
+        isMore: false,
         error: null,
         posts: [],
         isEnd: []
@@ -17,6 +19,9 @@ export default {
     getters: {
         isLoading(state) {
             return state.isLoading;
+        },
+        isMore(state) {
+            return state.isMore;
         },
         hasError(state) {
             return state.error !== null;
@@ -39,8 +44,12 @@ export default {
             state.isLoading = true;
             state.error = null;
         },
+        [FETCHING_MORE_POSTS](state) {
+            state.isMore = true;
+        },
         [FETCHING_POSTS_SUCCESS](state, posts) {
             state.isLoading = false;
+            state.isMore = false;
             state.error = null;
             state.posts =  state.posts.concat(posts);
         },
@@ -63,6 +72,8 @@ export default {
         async getPosts({ commit }, args) {
             if(args.more===false) {
                 commit(FETCHING_POSTS);
+            } else{
+                commit(FETCHING_MORE_POSTS);
             }
             try {
                 let response = await API.getPosts(args.search, args.offset, args.category);

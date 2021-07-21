@@ -55,14 +55,6 @@ export default {
     posts() {
         return this.$store.getters["post/posts"];
     }
-  },
-  watch: {
-    category: function (val) {
-      this.$store.dispatch("post/getPosts", this.category.id);
-    }
-  },
-  created: function () {
-    this.$store.dispatch("post/getPosts", this.category.id);
   }
 };
 </script>

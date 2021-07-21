@@ -1,6 +1,5 @@
 <template>
   <div class="row px-4">
-    <h1 class="text-center">{{category.name}}</h1>
     <div v-if="isLoading" class="disabled d-flex justify-content-center mt-4">
         <span class="spinner-border" role="status"></span>
     </div>
@@ -22,7 +21,7 @@
           </div>
       </div>
     </div>
-    <button :disabled="isMore" v-if="!(isEnd[category.id] || isEnd[0])" v-on:click="more(posts, category.id)" type="button" class="btn btn-secondary">
+    <button :disabled="isMore" v-if="!isLoading && !isEnd && posts.length > 0" v-on:click="more(posts)" type="button" class="btn btn-secondary">
       <span v-if="isMore" class="spinner-border" role="status"></span>
       <span v-else> More</span>
     </button>
@@ -31,56 +30,31 @@
 
 <script>
 export default {
-  name: "Posts",
-  props: {
-    category: {
-      type: Object,
-      default: () => ({
-        id: null,
-        name: 'home',
-        url: 'home'
-      })
-    },
-  },
+  name: "Search",
   computed: {
     isLoading() {
-      return this.$store.getters["post/isLoading"];
+        return this.$store.getters["search/isLoading"];
     },
     isMore() {
-      return this.$store.getters["post/isMore"];
+      return this.$store.getters["search/isMore"];
     },
     hasError() {
-      return this.$store.getters["post/hasError"];
+        return this.$store.getters["search/hasError"];
     },
     error() {
-      return this.$store.getters["post/error"];
+        return this.$store.getters["search/error"];
     },
     posts() {
-      let post = null
-      if (this.$props.category.id != null) {
-        post = this.$store.getters["post/postsById"](this.$props.category.id)
-      } else {
-        post = this.$store.getters["post/posts"]
-      }
-      if (post.length === 0 && !this.isLoading) {
-        this.more([], this.$props.category.id)
-      }
-      return post
+        return this.$store.getters["search/posts"];
     },
     isEnd() {
-      return this.$store.getters["post/isEnd"];
+      return this.$store.getters["search/isEnd"];
     }
   },
   methods: {
-    more: function (posts, category) {
-      this.$store.dispatch("post/getPosts", {more:true, category:category, offset:posts.length, search:null})
+    more: function (posts) {
+      this.$store.dispatch("search/getSearch", {more:true, offset:posts.length})
     }
   },
-  filters: {
-    url: function (value) {
-      if (!value) return ''
-      return value.replace(/\s/g, "").toLowerCase();
-    }
-  }
 };
 </script>

@@ -2,13 +2,17 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Posts from "../views/Posts";
 import Post from "../views/Post";
+import Search from "../views/Search";
 import store from "../store";
 
 Vue.use(VueRouter);
 
 const router = new VueRouter({
   mode: "history",
-  routes: [{ path: "/", name: "home", component: Posts, props: true}],
+  routes: [{ path: "/", name: "home", component: Posts, props: true}, { path: "/search", name: "search", component: Search}],
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 });
 
 function findPost(route) {
@@ -21,7 +25,7 @@ function findPost(route) {
   return {post : findPost};
 }
 
-(async function() {
+(function() {
   Promise.all([store.dispatch("menu/getMenu")]).then((values) => {
     values[0].forEach(link => {
       link.url = '/'+link.name.replace(/\s/g, "").toLowerCase();

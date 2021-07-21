@@ -35,7 +35,7 @@ class PostRepository extends ServiceEntityRepository
 
         if ($term) {
             $qb
-                ->andWhere('a.title LIKE :like')
+                ->andWhere('LOWER(a.title) LIKE LOWER(:like)')
                 ->setParameter('like', '%'.$term.'%')
             ;
         }

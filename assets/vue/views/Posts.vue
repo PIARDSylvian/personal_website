@@ -22,18 +22,16 @@
           </div>
       </div>
     </div>
-    <button :disabled="loading" v-if="!(isEnd[category.id] || isEnd[0])" v-on:click="more(posts, category.id)" type="button" class="btn btn-secondary">More</button>
+    <button :disabled="isMore" v-if="!(isEnd[category.id] || isEnd[0])" v-on:click="more(posts, category.id)" type="button" class="btn btn-secondary">
+      <span v-if="isMore" class="spinner-border" role="status"></span>
+      <span v-else> More</span>
+    </button>
   </div>
 </template>
 
 <script>
 export default {
   name: "Posts",
-  data () {
-    return {
-      loading: false
-    }
-  },
   props: {
     category: {
       type: Object,
@@ -48,6 +46,9 @@ export default {
     isLoading() {
       return this.$store.getters["post/isLoading"];
     },
+    isMore() {
+      return this.$store.getters["post/isMore"];
+    },
     hasError() {
       return this.$store.getters["post/hasError"];
     },
@@ -55,11 +56,16 @@ export default {
       return this.$store.getters["post/error"];
     },
     posts() {
-		if (this.$props.category.id != null) {
-			return this.$store.getters["post/postsById"](this.$props.category.id)
-		} else {
-			return this.$store.getters["post/posts"]
-		}
+      let post = null
+      if (this.$props.category.id != null) {
+        post = this.$store.getters["post/postsById"](this.$props.category.id)
+      } else {
+        post = this.$store.getters["post/posts"]
+      }
+      if (post.length === 0 && !this.isLoading) {
+        this.more([], this.$props.category.id)
+      }
+      return post
     },
     isEnd() {
       return this.$store.getters["post/isEnd"];
@@ -67,10 +73,7 @@ export default {
   },
   methods: {
     more: function (posts, category) {
-      this.loading = true
-      this.$store.dispatch("post/getPosts", {more:true, category:category, offset:posts.length, search:null}).finally(() => {
-        this.loading = false
-      })
+      this.$store.dispatch("post/getPosts", {more:true, category:category, offset:posts.length, search:null})
     }
   },
   filters: {
@@ -78,13 +81,6 @@ export default {
       if (!value) return ''
       return value.replace(/\s/g, "").toLowerCase();
     }
-  },
-  updated: function () {
-    this.$nextTick(function () {
-      if (this.posts.length == 0 && !this.loading) {
-        this.more(this.posts, this.$props.category.id)
-      }
-    })
-}
+  }
 };
 </script>

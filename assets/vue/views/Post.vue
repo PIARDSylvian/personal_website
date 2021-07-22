@@ -49,17 +49,19 @@ export default {
       return this.$store.getters["post/error"];
     },
     check() {
-      if(this.$props.post === null) {
-        this.$store.dispatch("post/getPost", this.$route.params.slug).then((values) => {
-          if (values.length == 0) {
-            this.$router.push({name: 'home'})
-          } else {
-            this.$data.data_post = values
-          }
-        })
-      } else {
-        this.$data.data_post = this.$props.post
-      }
+      this.$nextTick(() => {
+        if(this.$props.post === null) {
+          this.$store.dispatch("post/getPost", this.$route.params.slug).then((values) => {
+            if (!values) {
+              this.$router.push({name: 'category', params: {category: this.$route.params.category}}) // TODO 404 NOT FOUND
+            } else {
+              this.$data.data_post = values
+            }
+          })
+        } else {
+          this.$data.data_post = this.$props.post
+        }
+      })
       return true
     }
   }

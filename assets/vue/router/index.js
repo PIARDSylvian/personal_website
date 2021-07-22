@@ -16,6 +16,7 @@ const router = new VueRouter({
 });
 
 function findPost(route) {
+  findCategory(route);
   let findPost = null
   store.getters["post/posts"].some(function(post){
     if(post.slug === route.params.slug){
@@ -25,13 +26,23 @@ function findPost(route) {
   return {post : findPost};
 }
 
+function findCategory(route) {
+  let findCategory = null
+  store.getters["menu/menu"].some(function(category){
+    if(category.slug === route.params.category){
+      return findCategory = category
+    }
+  });
+  if (findCategory === null) {
+    router.push({name:"home"}); // TODO 404 NOT FOUND
+  }
+  return {category : findCategory};
+}
+
 (function() {
   Promise.all([store.dispatch("menu/getMenu")]).then((values) => {
-    values[0].forEach(link => {
-      link.url = '/'+link.name.replace(/\s/g, "").toLowerCase();
-      router.addRoute({ path: link.url, name: link.name, component: Posts, props: {category : link}});
-      router.addRoute({ path: link.url+'/:slug', name: link.name+'/post', component: Post, props: findPost});
-    });
+    router.addRoute({ path: '/:category', name: 'category', component: Posts, props: findCategory});
+    router.addRoute({ path: '/:category/:slug', name: 'post', component: Post, props: findPost});
     router.addRoute({ path: "*", redirect: "/" });
     store.dispatch("menu/populated")
   }).then(store.dispatch("post/getPosts", {more:false, category:null, offset:0, search:null}));

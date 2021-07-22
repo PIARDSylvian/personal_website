@@ -30,6 +30,12 @@ class Category
      */
     private $active = false;
 
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Serializer\Groups("menu", "post")
+     */
+    private $slug;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -55,6 +61,18 @@ class Category
     public function setActive(bool $active): self
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

@@ -8,6 +8,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use App\Entity\Category;
 use App\Entity\Post;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 /**
  * @Rest\Route("/api")
@@ -70,10 +71,11 @@ class ApiController extends AbstractController
 
     /**
      * @Rest\Get("/posts/{slug}", name="app_post_show")
-     * @Rest\View(StatusCode = 200, serializerGroups={"post"})
+     * @Rest\View(serializerGroups={"post"})
+     * @Entity("post", expr="repository.findOneBySlug(slug)")
      */
-    public function getPost(String $slug)
+    public function getPost(Post $post)
     {
-        return $this->getDoctrine()->getRepository(Post::class)->findOneBy(array("active" => true, "slug" => $slug));
+        return $post;
     }
 }

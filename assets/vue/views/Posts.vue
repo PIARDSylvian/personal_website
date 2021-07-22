@@ -3,26 +3,20 @@
     <h1 class="text-center">{{category.name}}</h1>
     <div v-if="isLoading" class="disabled d-flex justify-content-center mt-4">
         <span class="spinner-border" role="status"></span>
-    </div>
-
-    <div v-else-if="hasError" class="disabled mt-4">
-        <div class="alert alert-danger" role="alert">
-            {{ error }}
-        </div>
-    </div>                            
+    </div>                          
     <div v-for="post in posts" v-else :key="post.id" class="col-12	col-sm-6 col-md-4">
       <div class="card m-4">
         <img v-if="post.image" :src="post.image" class="card-img-top" :alt="post.title">
           <div class="card-body">
             <h5 class="card-title">{{post.title}}</h5>
             <p class="card-text">{{post.content}}</p>
-            <router-link :to="{name: (post.category.name + '/post'), params: { slug: post.slug }}" v-slot="{ href, navigate}" custom>
+            <router-link :to="{name:'post', params: { category: post.category.slug, slug: post.slug }}" v-slot="{ href, navigate}" custom>
               <a :href="href" @click="navigate" class="btn btn-primary">Lire</a>
             </router-link>
           </div>
       </div>
     </div>
-    <button :disabled="isMore" v-if="!(isEnd[category.id] || isEnd[0])" v-on:click="more(posts, category.id)" type="button" class="btn btn-secondary">
+    <button :disabled="isMore" v-if="category && !(isEnd[category.id] || isEnd[0])" v-on:click="more(posts, category.id)" type="button" class="btn btn-secondary">
       <span v-if="isMore" class="spinner-border" role="status"></span>
       <span v-else> More</span>
     </button>
@@ -37,8 +31,8 @@ export default {
       type: Object,
       default: () => ({
         id: null,
-        name: 'home',
-        url: 'home'
+        name: 'Home',
+        slug: null,
       })
     },
   },
@@ -49,20 +43,14 @@ export default {
     isMore() {
       return this.$store.getters["post/isMore"];
     },
-    hasError() {
-      return this.$store.getters["post/hasError"];
-    },
-    error() {
-      return this.$store.getters["post/error"];
-    },
     posts() {
       let post = null
-      if (this.$props.category.id != null) {
+      if (this.$props.category && this.$props.category.id != null) {
         post = this.$store.getters["post/postsById"](this.$props.category.id)
       } else {
         post = this.$store.getters["post/posts"]
       }
-      if (post.length === 0 && !this.isLoading) {
+      if (post.length === 0 && !this.isMore && !this.isLoading) {
         this.more([], this.$props.category.id)
       }
       return post

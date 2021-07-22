@@ -15,7 +15,7 @@
           <div class="card-body">
             <h5 class="card-title">{{post.title}}</h5>
             <p class="card-text">{{post.content}}</p>
-            <router-link :to="{name: (post.category.name + '/post'), params: { slug: post.slug }}" v-slot="{ href, navigate}" custom>
+            <router-link :to="{name:'post', params: { category: post.category.slug, slug: post.slug }}" v-slot="{ href, navigate}" custom>
               <a :href="href" @click="navigate" class="btn btn-primary">Lire</a>
             </router-link>
           </div>

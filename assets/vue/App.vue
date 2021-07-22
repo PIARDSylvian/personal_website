@@ -34,7 +34,7 @@
                         </div>
                     </li>
 
-                    <router-link v-for="link in menu" v-else :key="link.id" :to="{name: link.name}" active-class="active" v-slot="{ href, navigate, isActive, isExactActive }" custom >
+                    <router-link v-for="link in menu" v-else :key="link.id" :to="{name:'category', params: {category: link.slug}}" active-class="active" v-slot="{href,navigate, isActive, isExactActive }" custom >
                         <li class="nav-item">
                             <a :href="href" v-on="{ click: [navigate, closeMenu] }" class="nav-link link-dark" :class="[isActive && 'active' ,isExactActive && 'active']">{{ link.name }}</a>
                         </li>

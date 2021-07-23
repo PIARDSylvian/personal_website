@@ -43,6 +43,9 @@ export default {
     isMore() {
       return this.$store.getters["post/isMore"];
     },
+    isEnd() {
+      return this.$store.getters["post/isEnd"];
+    },
     posts() {
       let post = null
       if (this.$props.category && this.$props.category.id != null) {
@@ -50,7 +53,7 @@ export default {
       } else {
         post = this.$store.getters["post/posts"]
       }
-      if (post.length === 0 && !this.isMore && !this.isLoading) {
+      if (this.$props.category && !(this.isEnd[this.$props.category.id] || this.isEnd[0]) && !this.isMore && !this.isLoading && post.length === 0) {
         this.more([], this.$props.category.id)
       }
       return post

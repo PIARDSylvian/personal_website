@@ -11,7 +11,7 @@ use App\Entity\Post;
 class IndexController extends AbstractController
 {
     /**
-     * @Route("/{vueRouting}", requirements={"vueRouting"="^(?!api|_(profiler|wdt)).*"}, name="index")
+     * @Route("/{vueRouting}", requirements={"vueRouting"="^(?!api|login|logout|_(profiler|wdt)).*"}, name="app_index")
      * @return Response
      */
     public function index(): Response
@@ -42,6 +42,6 @@ class IndexController extends AbstractController
             }
             $entityManager->flush();
         }
-        return $this->render('base.html.twig', []);
+        return $this->render('index.html.twig', []);
     }
 }

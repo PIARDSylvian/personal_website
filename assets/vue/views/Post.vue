@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="isLoading" class="disabled d-flex justify-content-center mt-4">
+    <div v-if="isLoading" class="disabled d-flex justify-content-center align-items-center mt-4 vh-100">
         <span class="spinner-border" role="status"></span>
     </div>
 

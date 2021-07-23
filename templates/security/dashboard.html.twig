@@ -1,0 +1,15 @@
+{% extends '@!EasyAdmin/page/content.html.twig' %}
+
+{% block page_title %} Admin {% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        {% for menuItem in ea.mainMenu.items %}
+            {% if loop.index > 1 %}
+                <div class="d-grid gap-2 col-md-6 mx-auto mt-2">
+                    <a class="btn btn-lg btn-primary" href="{{ relative_path(menuItem.linkUrl) }}" role="button">{{menuItem.label}}</a>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

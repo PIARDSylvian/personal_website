@@ -2,6 +2,12 @@
 
 {% block page_title %} Admin {% endblock %}
 
+{% block header_logo %}
+    <a class="logo {{ ea.dashboardTitle|length > 14 ? 'logo-long' }}" title="{{ ea.dashboardTitle|striptags }}" href="{{ path('app_index',{vueRouting:''}) }}">
+        {{ ea.dashboardTitle|raw }}
+    </a>
+{% endblock header_logo %}
+
 {% block page_content %}
     <div class="row">
         {% for menuItem in ea.mainMenu.items %}

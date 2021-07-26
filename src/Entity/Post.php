@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\PostRepository;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
@@ -23,36 +24,45 @@ class Post
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      * @Serializer\Groups("post")
+     * @Assert\NotBlank
+     * @Assert\Length(min=3)
      */
     private $slug;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Serializer\Groups("post")
+     * @Assert\NotBlank
+     * @Assert\Length(min=3)
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Serializer\Groups("post")
+     * @Assert\Length(min=5)
      */
     private $image;
 
     /**
      * @ORM\Column(type="text")
      * @Serializer\Groups("post")
+     * @Assert\NotBlank
+     * @Assert\Length(min=20)
      */
     private $content;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      * @Serializer\Groups("post")
+     * @Assert\DateTime
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
      * @Serializer\Groups("post")
+     * @Assert\DateTime
      */
     private $updatedAt;
 
@@ -65,6 +75,7 @@ class Post
      * @ORM\ManyToOne(targetEntity=Category::class)
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      * @Serializer\Groups("post")
+     * @Assert\NotBlank
      */
     private $category;
 

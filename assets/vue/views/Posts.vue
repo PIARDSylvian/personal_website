@@ -1,7 +1,7 @@
 <template>
   <div class="row px-4">
     <h1 class="text-center">{{category.name}}</h1>
-    <div v-if="isLoading" class="disabled d-flex justify-content-center mt-4">
+    <div v-if="isLoading" class="disabled d-flex justify-content-center align-items-center mt-4 vh-100">
         <span class="spinner-border" role="status"></span>
     </div>                          
     <div v-for="post in posts" v-else :key="post.id" class="col-12	col-sm-6 col-md-4">

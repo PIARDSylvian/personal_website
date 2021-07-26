@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
@@ -22,6 +23,8 @@ class Category
     /**
      * @ORM\Column(type="string", length=255)
      * @Serializer\Groups("menu", "post")
+     * @Assert\NotBlank
+     * @Assert\Length(min=3)
      */
     private $name;
 
@@ -33,6 +36,8 @@ class Category
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      * @Serializer\Groups("menu", "post")
+     * @Assert\NotBlank
+     * @Assert\Length(min=3)
      */
     private $slug;
 

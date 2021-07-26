@@ -24,7 +24,7 @@ class PostRepository extends ServiceEntityRepository
         $qb = $this
             ->createQueryBuilder('a')
             ->select('a')
-            ->orderBy('a.createdAt', $order)
+            ->orderBy('a.createdAt, a.updatedAt', $order);
         ;
 
         if(!$active) {

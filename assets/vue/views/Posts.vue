@@ -47,16 +47,16 @@ export default {
 			return this.$store.getters["post/isEnd"];
 		},
 		posts() {
-			let post = null
+			let posts = null
 			if (this.$props.category && this.$props.category.id != null) {
-				post = this.$store.getters["post/postsById"](this.$props.category.id)
+				posts = this.$store.getters["post/postsById"](this.$props.category.id)
 			} else {
-				post = this.$store.getters["post/posts"]
+				posts = this.$store.getters["post/posts"]
 			}
-				if (this.$props.category && !(this.isEnd[this.$props.category.id] || this.isEnd[0]) && !this.isMore && !this.isLoading && post.length === 0) {
+			if (this.$props.category && !(this.isEnd[this.$props.category.id] || this.isEnd[0]) && !this.isMore && !this.isLoading && posts.length === 0) {
 				this.more([], this.$props.category.id)
 			}
-			return post
+			return posts
 		},
 		isEnd() {
 			return this.$store.getters["post/isEnd"];

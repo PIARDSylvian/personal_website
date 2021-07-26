@@ -7,7 +7,15 @@
 		<div class="alert alert-danger" role="alert">
 			{{ error }}
 		</div>
-	</div>                            
+	</div>
+	<div v-if="posts.length === 0">
+		<div class="alert alert-primary d-flex align-items-center mt-4" role="alert">
+			<div>
+				<i class="bi bi-info-circle-fill"></i>
+				Aucun résultat
+			</div>
+		</div>
+	</div>
 	<div v-for="post in posts" v-else :key="post.id" class="col-12	col-sm-6 col-md-4">
 		<div class="card m-4">
 			<img v-if="post.image" :src="post.image" class="card-img-top" :alt="post.title">
@@ -44,7 +52,11 @@ export default {
 			return this.$store.getters["search/error"];
 		},
 		posts() {
-			return this.$store.getters["search/posts"];
+			let posts = this.$store.getters["search/posts"];
+			if (posts.length === 0 && !this.isEnd) {
+				this.$store.dispatch("search/getSearch", {search:'', more:false});
+			}
+			return posts;
 		},
 		isEnd() {
 			return this.$store.getters["search/isEnd"];

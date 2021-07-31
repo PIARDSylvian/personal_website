@@ -12,7 +12,7 @@ class ExceptionListener
     {
         $exception = $event->getThrowable();
 
-        if ($exception->getStatusCode() === Response::HTTP_NOT_FOUND) {
+        if ($exception instanceof HttpExceptionInterface && $exception->getStatusCode() === Response::HTTP_NOT_FOUND) {
             $message ='Page not found';
         } else {
             $message ='Internal server error';

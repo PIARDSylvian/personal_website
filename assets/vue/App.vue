@@ -2,8 +2,8 @@
 <div class="container-fluid">
     <div class="row">
         <nav class="col-12 col-sm-4 col-md-2 navbar-expand-sm navbar-light bg-light">
-            <router-link class="align-items-center mb-md-0 me-md-auto link-dark text-decoration-none" to="/">
-                <span class="navbar-brand">App</span>
+            <router-link class="d-flex justify-content-center" to="/">
+                <img src="build/logo-sp-min.png" alt="ACME logo">
             </router-link>
             <hr>
             <div class="d-flex justify-content-between">

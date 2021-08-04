@@ -50,7 +50,7 @@ export default {
 			this.$nextTick(() => {
 				if(this.$props.post === null) {
 					this.$store.dispatch("post/getPost", this.$route.params.slug).then((values) => {
-						if (!values) {
+						if (!values || values.category.slug !==  this.$route.params.category) {
 							this.$router.push({name: 'category', params: {category: this.$route.params.category}}) // TODO 404 NOT FOUND
 						} else {
 							this.$data.data_post = values

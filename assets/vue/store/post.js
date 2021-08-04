@@ -89,14 +89,16 @@ export default {
             }
         },
         async getPost({ commit }, slug) {
-            commit(FETCHING_POSTS);
-            try {
-                let response = await API.getPost(slug);
-                commit(FETCHING_POST_SUCCESS);
-                return response.data;
-            } catch (error) {
-                commit(FETCHING_POSTS_ERROR, error);
-                return null;
+            if(slug) {
+                commit(FETCHING_POSTS);
+                try {
+                    let response = await API.getPost(slug);
+                    commit(FETCHING_POST_SUCCESS);
+                    return response.data;
+                } catch (error) {
+                    commit(FETCHING_POSTS_ERROR, error);
+                    return null;
+                }
             }
         }
     }

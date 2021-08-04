@@ -19,7 +19,7 @@ function findPost(route) {
 	findCategory(route);
 	let findPost = null
 	store.getters["post/posts"].some(function(post){
-		if(post.slug === route.params.slug){
+		if((post.slug === route.params.slug) && (post.category.slug === route.params.category)){
 			return findPost = post
 		}
 	});
@@ -34,7 +34,7 @@ function findCategory(route) {
 		}
 	});
 	if (findCategory === null) {
-		router.push({name:"home"}); // TODO 404 NOT FOUND
+		router.push({name:"home", params: { category: {name:'home'} }}); // TODO 404 NOT FOUND
 	}
 	return {category : findCategory};
 }

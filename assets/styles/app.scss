@@ -6,7 +6,7 @@
     &.nav-link {
         background-color: $color;
         color: $text-color;
-        border-color: $text-color;
+        border-color: $color;
 
         &:hover {
             background-color: shade-color($color, 20%);
@@ -16,6 +16,8 @@
             color: $text-color;
             background-color: $color;
         }
+
+        
     }
 
     &.bi {
@@ -75,4 +77,10 @@ body {
 
 .gray {
     @include color($gray-300, black);
+}
+
+@media (min-width: "576px") { 
+    nav {
+        min-height: 100vh;
+    }
 }

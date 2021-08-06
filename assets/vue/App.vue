@@ -3,11 +3,11 @@
     <div class="row">
         <nav class="col-12 col-sm-4 col-md-2 navbar-expand-sm navbar-light bg-light">
             <router-link class="d-flex justify-content-center img-fluid" to="/">
-                <img :src="'/build/logo-sp-min.png'" alt="logo">
+                <img :src="'/build/logo-sp-min.png'" class="img-fluid" alt="logo">
             </router-link>
             <hr>
             <div class="d-flex justify-content-between">
-                <div class="col-xs-6 col-md-12">
+                <div class="col-8 col-md-12">
                     <Search />
                 </div>
                 <button class="col-md navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,10 +15,10 @@
                 </button>
             </div>
             <hr>
-            <ul class="nav nav-pills min-vh-100 flex-column mb-2 collapse navbar-collapse align-items-stretch" id="navbarSupportedContent">
+            <ul class="nav nav-pills flex-column mb-2 collapse navbar-collapse align-items-stretch" id="navbarSupportedContent">
                 <router-link to="/" active-class="active" v-slot="{ href, navigate, isExactActive}" custom>
                     <li class="nav-item">
-                        <a :href="href" v-on="{ click: [navigate, closeMenu] }" class="nav-link link-dark d-flex justify-content-between" :class="[isExactActive && 'active gray']">Home</a>
+                        <a :href="href" v-on="{ click: [navigate, closeMenu] }" class="nav-link link-dark" :class="[isExactActive && 'active gray']"><i class="bi bi-house-fill me-2 text-secondary"></i>Home</a>
                     </li>
                 </router-link>
                 <li v-if="hasError" class="nav-item disabled mt-3">

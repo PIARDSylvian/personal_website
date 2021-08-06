@@ -4,19 +4,20 @@
 	<div v-if="isLoading" class="disabled d-flex justify-content-center align-items-center mt-4 vh-100">
 		<span class="spinner-border" role="status"></span>
 	</div>                          
-	<div v-for="post in posts" v-else :key="post.id" class="col-12 col-sm-6 col-md-4">
-		<div class="card m-4">
+	<div v-for="post in posts" v-else :key="post.id" class="col-12 col-sm-6 col-lg-4">
+		<div class="card m-4 text-center text-secondary">
 			<img v-if="post.image" :src="post.image" class="card-img-top" :alt="post.title">
 			<div class="card-body">
-				<h5 class="card-title">{{post.title}}</h5>
-				<p class="card-text">{{post.content}}</p>
 				<router-link :to="{name:'post', params: { category: post.category.slug, slug: post.slug }}" v-slot="{ href, navigate}" custom>
-					<a :href="href" @click="navigate" class="btn btn-primary" :class="post.category.color">Lire</a>
+					<h5 class="card-title">
+						<a :href="href" @click="navigate" class="stretched-link text-decoration-none text-reset">{{post.title}}</a>
+					</h5>
 				</router-link>
+				<p class="card-text">{{post.content}}</p>
 			</div>
 		</div>
 	</div>
-	<button :disabled="isMore" v-if="category && !(isEnd[category.id] || isEnd[0])" v-on:click="more(posts, category.id)" type="button" class="btn btn-secondary">
+	<button :disabled="isMore" v-if="category && !(isEnd[category.id] || isEnd[0])" v-on:click="more(posts, category.id)" type="button" class="btn btn-secondary mb-3" :class="category.color">
 		<span v-if="isMore" class="spinner-border" role="status"></span>
 		<span v-else> More</span>
 	</button>

@@ -7,6 +7,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+
 
 class CategoryCrudController extends AbstractCrudController
 {
@@ -25,6 +27,19 @@ class CategoryCrudController extends AbstractCrudController
         return [
             TextField::new('name'),
             TextField::new('slug')->hideOnIndex(),
+            ChoiceField::new('color')->setChoices([
+                "blue"=>"blue",
+                "indigo"=>"indigo",
+                "purple"=>"purple",
+                "pink"=>"pink",
+                "red"=>"red",
+                "orange"=>"orange",
+                "yellow"=>"yellow",
+                "green"=>"green",
+                "teal"=>"teal",
+                "cyan"=>"cyan",
+                "gray"=>"gray"
+            ]),
             BooleanField::new('active')
         ];
     }

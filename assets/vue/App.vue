@@ -18,7 +18,7 @@
             <ul class="nav nav-pills min-vh-100 flex-column mb-2 collapse navbar-collapse align-items-stretch" id="navbarSupportedContent">
                 <router-link to="/" active-class="active" v-slot="{ href, navigate, isExactActive}" custom>
                     <li class="nav-item">
-                        <a :href="href" v-on="{ click: [navigate, closeMenu] }" class="nav-link link-dark" :class="[isExactActive && 'active']">Home</a>
+                        <a :href="href" v-on="{ click: [navigate, closeMenu] }" class="nav-link link-dark d-flex justify-content-between" :class="[isExactActive && 'active gray']">Home</a>
                     </li>
                 </router-link>
                 <li v-if="hasError" class="nav-item disabled mt-3">
@@ -33,7 +33,7 @@
                 </li>
                 <router-link v-for="link in menu" v-else :key="link.id" :to="{name:'category', params: {category: link.slug}}" active-class="active" v-slot="{href,navigate, isActive, isExactActive }" custom >
                     <li class="nav-item">
-                        <a :href="href" v-on="{ click: [navigate, closeMenu] }" class="nav-link link-dark" :class="[isActive && 'active' ,isExactActive && 'active']">{{ link.name }}</a>
+                        <a :href="href" v-on="{ click: [navigate, closeMenu] }" class="nav-link link-dark d-flex justify-content-between" :class="[isActive && 'active' ,isExactActive && 'active', isExactActive && link.color]">{{ link.name }} <i class="bi bi-circle-fill" :class="[!isExactActive && link.color]"></i></a>
                     </li>
                 </router-link>
             </ul>

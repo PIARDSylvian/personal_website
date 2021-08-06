@@ -4,14 +4,14 @@
 	<div v-if="isLoading" class="disabled d-flex justify-content-center align-items-center mt-4 vh-100">
 		<span class="spinner-border" role="status"></span>
 	</div>                          
-	<div v-for="post in posts" v-else :key="post.id" class="col-12	col-sm-6 col-md-4">
+	<div v-for="post in posts" v-else :key="post.id" class="col-12 col-sm-6 col-md-4">
 		<div class="card m-4">
 			<img v-if="post.image" :src="post.image" class="card-img-top" :alt="post.title">
 			<div class="card-body">
 				<h5 class="card-title">{{post.title}}</h5>
 				<p class="card-text">{{post.content}}</p>
 				<router-link :to="{name:'post', params: { category: post.category.slug, slug: post.slug }}" v-slot="{ href, navigate}" custom>
-					<a :href="href" @click="navigate" class="btn btn-primary">Lire</a>
+					<a :href="href" @click="navigate" class="btn btn-primary" :class="post.category.color">Lire</a>
 				</router-link>
 			</div>
 		</div>

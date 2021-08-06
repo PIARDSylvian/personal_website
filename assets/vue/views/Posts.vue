@@ -1,6 +1,6 @@
 <template>
 <div class="row px-4">
-	<h1 v-if="category" class="text-center">{{category.name}}</h1>
+	<h1 v-if="category" class="text-center d-none">{{category.name}}</h1>
 	<div v-if="isLoading" class="disabled d-flex justify-content-center align-items-center mt-4 vh-100">
 		<span class="spinner-border" role="status"></span>
 	</div>                          

@@ -1,6 +1,6 @@
 <template>
 <div class="col-12 col-md-4 masonry-card">
-	<div class="card m-2">
+	<div class="card m-2 text-center text-secondary">
 		<img v-if="post.image" :src="post.image" class="card-img-top" :alt="post.title">
 		<div class="card-body">
 			<router-link :to="{name:'post', params: { category: post.category.slug, slug: post.slug }}" v-slot="{ href, navigate}" custom>

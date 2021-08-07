@@ -3,9 +3,8 @@
     <div class="row">
         <nav class="col-12 col-sm-4 col-md-2 navbar-expand-sm navbar-light bg-light">
             <router-link class="d-flex justify-content-center img-fluid" to="/">
-                <img :src="'/build/logo-sp-min.png'" class="img-fluid" alt="logo">
+                <img :src="'/build/logo-sp-min.png'" class="img-fluid my-2" alt="logo">
             </router-link>
-            <hr>
             <div class="d-flex justify-content-between">
                 <div class="col-8 col-md-12">
                     <Search />
@@ -38,7 +37,7 @@
                 </router-link>
             </ul>
         </nav>
-        <main v-if="!isLoading && !hasError" class="col-12 col-sm-8 col-md-10">
+        <main v-if="!isLoading && !hasError" class="col-12 col-sm-8 col-md-10 my-2">
             <router-view />
         </main>
     </div>

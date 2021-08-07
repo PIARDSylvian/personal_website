@@ -18,7 +18,7 @@
         }
     }
 
-    &.background::after {
+    &.card-image::after {
         background-color: $color;
     }
 
@@ -35,28 +35,57 @@ body {
         transition: none;
         display: none;
     }
+
+    nav form .form-control,
+    nav form .btn {
+        border: solid $gray-300;
+
+        &:focus {
+            border: solid $gray-600;
+            box-shadow: none;
+        }
+
+        &.btn,
+        &.btn:focus,
+        &.btn:active {
+            border: solid $gray-300;
+            background-color: $gray-300;
+            box-shadow: none;
+        }
+
+        &.btn:hover {
+            border: solid $gray-600;
+            background-color: $gray-600;
+        }
+    }
 }
 
-.masonry-card .card .card-image {
-    position: relative;
-    padding: 1em;
+.masonry-card .card {
+    border: 0;
+    border-radius: 0;
 
-    & img {
-        border: 0;
-        border-radius: 0;
+    .card-image {
         position: relative;
-        background-color: white;
-    }
+        padding: 1vw;
+
+        & img {
+            border: 0;
+            border-radius: 0;
+            position: relative;
+            background-color: white;
+            z-index: 1;
+        }
 
 
-    & .background::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        clip-path: polygon(0 0, 0% 100%, 50% 100%);
-        width: 100%;
-        height: 100%;
+        &:after {
+            content: "";
+            padding-right: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            clip-path: polygon(0 0, 0% 100%, 100% 100%);
+            height: 100%;
+        }
     }
 }
 

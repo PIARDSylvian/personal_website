@@ -1,23 +1,13 @@
 <template>
-<div class="row px-4">
+<div>
 	<h1 v-if="category" class="text-center d-none">{{category.name}}</h1>
 	<div v-if="isLoading" class="disabled d-flex justify-content-center align-items-center mt-4 vh-100">
 		<span class="spinner-border" role="status"></span>
-	</div>                          
-	<div v-for="post in posts" v-else :key="post.id" class="col-12 col-sm-6 col-lg-4">
-		<div class="card m-4 text-center text-secondary">
-			<img v-if="post.image" :src="post.image" class="card-img-top" :alt="post.title">
-			<div class="card-body">
-				<router-link :to="{name:'post', params: { category: post.category.slug, slug: post.slug }}" v-slot="{ href, navigate}" custom>
-					<h5 class="card-title">
-						<a :href="href" @click="navigate" class="stretched-link text-decoration-none text-reset">{{post.title}}</a>
-					</h5>
-				</router-link>
-				<p class="card-text">{{post.content}}</p>
-			</div>
-		</div>
 	</div>
-	<button :disabled="isMore" v-if="category && !(isEnd[category.id] || isEnd[0])" v-on:click="more(posts, category.id)" type="button" class="btn btn-secondary mb-3" :class="category.color">
+	<div id="masonry-grid">
+		<Card :post="post" v-for="post in posts" :key="post.id"/>
+	</div>
+	<button :disabled="isMore" v-if="category && !(isEnd[category.id] || isEnd[0])" v-on:click="more(posts, category.id)" type="button" class="btn btn-secondary w-100 my-2" :class="category.color">
 		<span v-if="isMore" class="spinner-border" role="status"></span>
 		<span v-else> More</span>
 	</button>
@@ -25,8 +15,12 @@
 </template>
 
 <script>
+import Card from "../components/card";
+import Masonry from 'masonry-layout';
+
 export default {
 	name: "Posts",
+	components: {Card},
 	props: {
 		category: {
 			type: Object,
@@ -57,6 +51,17 @@ export default {
 			if (this.$props.category && !(this.isEnd[this.$props.category.id] || this.isEnd[0]) && !this.isMore && !this.isLoading && posts.length === 0) {
 				this.more([], this.$props.category.id)
 			}
+
+			this.$nextTick(() => {
+				let container = document.querySelector('#masonry-grid');
+				if (container && !this.isLoading) {
+					new Masonry( container, {
+						itemSelector: '.masonry-card',
+						percentPosition: true
+					}); 
+				}
+			});
+
 			return posts
 		},
 		isEnd() {

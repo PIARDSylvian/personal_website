@@ -25,6 +25,7 @@
 <script>
 import Card from "../components/card";
 import Masonry from 'masonry-layout';
+import Imagesloaded from 'imagesloaded';
 
 export default {
 	name: "Search",
@@ -51,11 +52,16 @@ export default {
 			this.$nextTick(() => {
 				let container = document.querySelector('#masonry-grid');
 				if (container && !this.isLoading) {
-					new Masonry( container, {
+					const msnry = new Masonry( container, {
 						itemSelector: '.masonry-card',
 						percentPosition: true,
 						transitionDuration: '0.1s',
-					}); 
+						initLayout: false
+					});
+
+					new Imagesloaded(container,function() {
+						msnry.layout();
+					});
 				}
 			});
 

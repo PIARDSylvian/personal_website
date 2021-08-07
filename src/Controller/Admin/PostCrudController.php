@@ -29,7 +29,7 @@ class PostCrudController extends AbstractCrudController
         return [
             TextField::new('title'),
             TextField::new('slug')->hideOnIndex(),
-            UrlField::new('image')->hideOnIndex(),
+            TextField::new('image')->hideOnIndex(),
             TextareaField::new('content')->hideOnIndex(),
             BooleanField::new('active'),
             DateTimeField::new('createdAt')->hideOnForm(),

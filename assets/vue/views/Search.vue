@@ -9,7 +9,7 @@
 	</div>
 	<div v-else-if="posts.length === 0">
 		<div class="alert alert-primary d-flex align-items-center" role="alert">
-			<div><i class="bi bi-info-circle-fill"></i>Aucun résultat</div>
+			<div><i class="bi bi-info-circle-fill"></i> Aucun résultat</div>
 		</div>
 	</div>
 	<div id="masonry-grid">

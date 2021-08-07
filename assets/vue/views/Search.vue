@@ -53,7 +53,8 @@ export default {
 				if (container && !this.isLoading) {
 					new Masonry( container, {
 						itemSelector: '.masonry-card',
-						percentPosition: true
+						percentPosition: true,
+						transitionDuration: '0.1s',
 					}); 
 				}
 			});

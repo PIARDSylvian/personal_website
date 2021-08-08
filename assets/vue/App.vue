@@ -32,12 +32,12 @@
                 </li>
                 <router-link v-for="link in menu" v-else :key="link.id" :to="{name:'category', params: {category: link.slug}}" active-class="active" v-slot="{href,navigate, isActive, isExactActive }" custom >
                     <li class="nav-item">
-                        <a :href="href" v-on="{ click: [navigate, closeMenu] }" class="nav-link link-dark" :class="[isActive && 'active' ,isExactActive && 'active', isExactActive && link.color]"><i class="bi bi-circle-fill me-2" :class="[!isExactActive && link.color]"></i>{{ link.name }}</a>
+                        <a :href="href" v-on="{ click: [navigate, closeMenu] }" class="nav-link link-dark" :class="[isActive && 'active' ,isExactActive && 'active', isActive && link.color]"><i class="bi bi-circle-fill me-2" :class="[!isActive && link.color]"></i>{{ link.name }}</a>
                     </li>
                 </router-link>
             </ul>
         </nav>
-        <main v-if="!isLoading && !hasError" class="col-12 col-sm-8 col-md-10 my-2">
+        <main v-if="!isLoading && !hasError" class="col-12 col-sm-8 col-md-10">
             <router-view />
         </main>
     </div>

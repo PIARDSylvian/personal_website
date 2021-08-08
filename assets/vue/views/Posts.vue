@@ -7,10 +7,12 @@
 	<div id="masonry-grid">
 		<Card :post="post" v-for="post in posts" :key="post.id"/>
 	</div>
-	<button :disabled="isMore" v-if="category && !(isEnd[category.id] || isEnd[0])" v-on:click="more(posts, category.id)" type="button" class="btn btn-secondary w-100 my-2" :class="category.color">
-		<span v-if="isMore" class="spinner-border" role="status"></span>
-		<span v-else> More</span>
-	</button>
+	<div class="col-12 my-2 px-2">
+		<button :disabled="isMore" v-if="category && !(isEnd[category.id] || isEnd[0])" v-on:click="more(posts, category.id)" type="button" class="btn btn-secondary w-100" :class="category.color">
+			<span v-if="isMore" class="spinner-border" role="status"></span>
+			<span v-else> More</span>
+		</button>
+	</div>
 </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="my-2">
 	<h1 class="text-center d-none">Search</h1>
 	<div v-if="isLoading" class="disabled d-flex justify-content-center align-items-center mt-4 vh-100">
 		<span class="spinner-border" role="status"></span>

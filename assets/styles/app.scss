@@ -4,17 +4,25 @@
 @mixin color($color, $text-color) {
     &.btn,
     &.nav-link {
-        color: $gray-600;
-
-        &:hover {
-            background-color: $gray-200;
-        }
-
         &.active {
             color: $text-color;
             background-color: $color;
             border-color: $color;
         }
+    }
+
+    &.nav-link {
+        color: $gray-600;
+
+        &:hover:not(.active)  {
+            background-color: $gray-200;
+        }
+    }
+
+    &.btn {
+        background-color: $color;
+        color: $text-color;
+        border-color: $color;
     }
 
     &.card-image::after {

@@ -4,17 +4,16 @@
 @mixin color($color, $text-color) {
     &.btn,
     &.nav-link {
-        background-color: $color;
-        color: $text-color;
-        border-color: $color;
+        color: $gray-600;
 
         &:hover {
-            background-color: shade-color($color, 20%);
+            background-color: $gray-200;
         }
 
         &.active {
             color: $text-color;
             background-color: $color;
+            border-color: $color;
         }
     }
 

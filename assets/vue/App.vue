@@ -3,7 +3,7 @@
     <div class="row">
         <nav class="col-12 col-sm-4 col-md-3 col-lg-2 navbar-expand-sm navbar-light bg-light">
             <router-link class="d-flex justify-content-center img-fluid" to="/">
-                <img :src="'/build/logo-sp-min.png'" class="img-fluid my-2" alt="logo">
+                <img :src="require('./../images/logo-sp-min.png')" class="img-fluid my-2" alt="logo">
             </router-link>
             <div class="d-flex justify-content-between">
                 <div class="col-8 col-sm-12">

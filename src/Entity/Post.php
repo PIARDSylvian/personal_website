@@ -6,10 +6,12 @@ use App\Repository\PostRepository;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
  * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity("slug")
  */
 class Post
 {
@@ -55,14 +57,14 @@ class Post
     /**
      * @ORM\Column(type="datetime_immutable")
      * @Serializer\Groups("post")
-     * @Assert\DateTime
+     * @Assert\Type("\DateTimeInterface")
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
      * @Serializer\Groups("post")
-     * @Assert\DateTime
+     * @Assert\Type("\DateTimeInterface")
      */
     private $updatedAt;
 

@@ -10,7 +10,7 @@
 					<a :href="href" @click="navigate" class="stretched-link text-decoration-none text-reset">{{post.title}}</a>
 				</h5>
 			</router-link>
-			<p class="card-text">{{post.content}}</p>
+			<p class="card-text" v-html="post.content"></p>
 		</div>
 	</div>
 </div>

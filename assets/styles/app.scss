@@ -140,7 +140,7 @@ body {
 }
 
 .gray {
-    @include color($gray-300, black);
+    @include color($gray-300, $gray-600);
 }
 
 @media (min-width: "576px") { 

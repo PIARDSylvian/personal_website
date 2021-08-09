@@ -32,6 +32,12 @@
     &.bi {
         color: $color;
     }
+
+    &.post {
+        h1, strong {
+            color: $color;
+        }
+    }
 }
 
 body {

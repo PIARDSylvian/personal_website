@@ -41,6 +41,13 @@ class Category
      */
     private $slug;
 
+    /**
+     * @Serializer\Groups("menu", "post")
+     * @ORM\Column(type="string", length=6)
+     * @Assert\Choice({"blue", "indigo", "purple", "pink", "red", "orange", "yellow", "green", "teal", "cyan", "gray"})
+     */
+    private $color;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,5 +92,17 @@ class Category
     public function __toString(): string
     {
         return $this->name;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(string $color): self
+    {
+        $this->color = $color;
+
+        return $this;
     }
 }

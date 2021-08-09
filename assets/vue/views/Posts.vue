@@ -61,8 +61,7 @@ export default {
 					const msnry = new Masonry( container, {
 						itemSelector: '.masonry-card',
 						percentPosition: true,
-						transitionDuration: '0.1s',
-						initLayout: false
+						transitionDuration: '0.1s'
 					});
 
 					new Imagesloaded(container,function() {

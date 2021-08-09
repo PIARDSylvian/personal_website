@@ -1,5 +1,5 @@
 <template>
-<div class="col-12 col-md-4 masonry-card">
+<div class="col-12 col-sm-6 col-lg-4 masonry-card">
 	<div class="card m-2 text-center text-secondary">
 		<div class="card-image" :class="post.category.color" v-if="post.image">
 			<img v-if="post.image" :src="post.image" class="card-img-top" :alt="post.title">

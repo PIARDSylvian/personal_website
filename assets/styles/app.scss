@@ -38,6 +38,10 @@
             color: $color;
         }
     }
+
+    main #scroll-btn {
+        background-color: $color;
+    }
 }
 
 body {
@@ -74,6 +78,10 @@ body {
             border: solid $gray-600;
             background-color: $gray-600;
         }
+    }
+
+    main #scroll-btn {
+        left:inherit;
     }
 }
 

@@ -39,6 +39,7 @@
         </nav>
         <main v-if="!isLoading && !hasError" class="col-12 col-sm-8 col-md-9 col-lg-10">
             <router-view />
+            <button id="scroll-btn" class="btn btn-secondary fixed-bottom me-5 mb-5 float-right d-none" v-on:click="scrollToTop"><i class="bi bi-chevron-up"></i></button>
         </main>
     </div>
 </div>
@@ -71,13 +72,27 @@ export default {
             return this.$store.getters["menu/isPopulated"];
         }
     },
+    created: function () {
+        window.addEventListener('scroll', this.handleScroll);
+    },
+    destroyed: function () {
+        window.removeEventListener('scroll', this.handleScroll);
+    },
     methods: {
         closeMenu: function () {
             document.body.querySelector("#navbarSupportedContent").classList.remove("show")
         },
+        handleScroll: function () {
+            if (window.scrollY > 100) {
+                document.body.querySelector("#scroll-btn").classList.remove("d-none")
+            } else {
+                document.body.querySelector("#scroll-btn").classList.add("d-none")
+            }
+        },
         scrollToTop: function () {
             window.scrollTo(0,0);
         }
+
     }
 }
 </script>

@@ -13,7 +13,7 @@
 			<h1 class="text-center display-6 fw-bold py-5">{{data_post.title}}</h1>
 			<img v-if="data_post.image" :src="data_post.image" class="img-fluid mx-auto d-block pb-5" :alt="data_post.title" />
 			<div class="col-xs-12 mx-auto col-md-10 text-justify">
-				<p><strong>Crée le</strong> <em>{{data_post.created_at | dateFormat}}</em><span v-if="data_post.updated_at"><br /><strong>Mis a jour le</strong> <em>{{data_post.updated_at | dateFormat}}</em></span></p>
+				<p><strong>Crée le</strong> <em>{{data_post.created_at | dateFormat}}</em><span v-if="data_post.updated_at"><br /><strong>Mis à jour le</strong> <em>{{data_post.updated_at | dateFormat}}</em></span></p>
 				<p class="lead">{{data_post.content}}</p>
 			</div>
 		</div>

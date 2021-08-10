@@ -1,13 +1,18 @@
 <template>
 <div class="my-2">
 	<h1 v-if="category" class="text-center d-none">{{category.name}}</h1>
-	<div v-if="isLoading" class="disabled d-flex justify-content-center align-items-center mt-4 vh-100">
+	<div v-if="hasError" class="col-12 my-2 px-2">
+		<div class="alert alert-danger" role="alert">
+			{{ error }}
+		</div>
+	</div>
+	<div v-else-if="isLoading" class="disabled d-flex justify-content-center align-items-center mt-4 vh-100">
 		<span class="spinner-border" role="status"></span>
 	</div>
 	<div id="masonry-grid">
 		<Card :post="post" v-for="post in posts" :key="post.id"/>
 	</div>
-	<div class="col-12 my-2 px-2">
+	<div v-if="!hasError" class="col-12 my-2 px-2">
 		<button :disabled="isMore" v-if="category && !(isEnd[category.id] || isEnd[0])" v-on:click="more(posts, category.id)" type="button" class="btn btn-secondary w-100 fw-bold" :class="category.color">
 			<span v-if="isMore" class="spinner-border" role="status"></span>
 			<span v-else> More</span>
@@ -38,6 +43,12 @@ export default {
 		isLoading() {
 			return this.$store.getters["post/isLoading"];
 		},
+		hasError() {
+			return this.$store.getters["post/hasError"];
+		},
+        error() {
+            return this.$store.getters["post/error"];
+        },
 		isMore() {
 			return this.$store.getters["post/isMore"];
 		},
@@ -51,7 +62,7 @@ export default {
 			} else {
 				posts = this.$store.getters["post/posts"]
 			}
-			if (this.$props.category && !(this.isEnd[this.$props.category.id] || this.isEnd[0]) && !this.isMore && !this.isLoading && posts.length === 0) {
+			if (!this.hasError && this.$props.category && !(this.isEnd[this.$props.category.id] || this.isEnd[0]) && !this.isMore && !this.isLoading && posts.length === 0) {
 				this.more([], this.$props.category.id)
 			}
 

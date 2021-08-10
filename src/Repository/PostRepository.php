@@ -24,7 +24,8 @@ class PostRepository extends ServiceEntityRepository
         $qb = $this
             ->createQueryBuilder('a')
             ->select('a')
-            ->orderBy('a.createdAt, a.updatedAt', $order);
+            ->orderBy('CASE WHEN a.updatedAt IS NULL THEN 1 ELSE 0 END', $order)
+            ->orderBy('a.createdAt', $order)
         ;
 
         if(!$active) {

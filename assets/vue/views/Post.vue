@@ -23,6 +23,7 @@
 
 <script>
 import moment from 'moment';
+moment.locale('fr');
 
 export default {
 	name: "Post",
@@ -72,7 +73,7 @@ export default {
 	},
 	filters : {
 		dateFormat( $date ) {
-			return moment(String($date)).format('DD/MM/YYYY hh:mm');
+			return moment(String($date)).format('lll');
 		}
 	}
 };

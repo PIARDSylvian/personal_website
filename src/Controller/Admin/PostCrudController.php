@@ -32,8 +32,8 @@ class PostCrudController extends AbstractCrudController
             TextField::new('image')->hideOnIndex(),
             TextareaField::new('content')->hideOnIndex(),
             BooleanField::new('active'),
-            DateTimeField::new('createdAt')->hideOnForm(),
-            DateTimeField::new('updatedAt')->hideOnForm(),
+            DateTimeField::new('createdAt')->setFormat('dd/MM/Y HH:mm')->hideOnForm(),
+            DateTimeField::new('updatedAt')->setFormat('dd/MM/Y HH:mm')->hideOnForm(),
             AssociationField::new('category')
         ];
     }

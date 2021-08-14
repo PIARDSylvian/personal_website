@@ -19,13 +19,12 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
-    public function search($term, int $category = null, string $order = 'desc', int $limit = 20, int $offset = 0, bool $active = false)
+    public function search($term, int $category = null, string $order = 'DESC', int $limit = 20, int $offset = 0, bool $active = false)
     {
         $qb = $this
             ->createQueryBuilder('a')
             ->select('a')
-            ->orderBy('CASE WHEN a.updatedAt IS NULL THEN 1 ELSE 0 END', $order)
-            ->orderBy('a.createdAt', $order)
+            ->orderBy('CASE WHEN a.updatedAt IS NULL THEN a.createdAt ELSE a.updatedAt END', $order);
         ;
 
         if(!$active) {
